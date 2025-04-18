@@ -4,6 +4,8 @@ from typing import Dict, List, Optional, Union
 from dataclasses import dataclass
 from pathlib import Path
 
+# 目前用处不大
+
 @dataclass
 class LogEntry:
     """日志条目数据类"""

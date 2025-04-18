@@ -1,5 +1,7 @@
 import re
 from typing import List, Dict, Optional
+from collections import defaultdict
+import json
 
 class SecurityPatterns:
     """安全检测相关的正则表达式模式"""
@@ -144,3 +146,24 @@ class SecurityDetector:
         )
         
         return desensitized_text 
+    
+
+# 使用示例
+f = open("http.log", 'r', encoding='utf-8')
+target_file = f.read()
+
+detector = SecurityDetector()
+sensitive_info = detector.find_sensitive_info(target_file)
+phone_counts = defaultdict(int)
+for phone in sensitive_info['phone']:
+    if phone in phone_counts:
+        phone_counts[phone] += 1
+    else:
+        phone_counts[phone] = 1
+
+# print(phone_counts)
+sorted_counts = sorted(phone_counts.items(), key=lambda x: x[1], reverse=True)
+print(sorted_counts)
+# with open('sensitive_info_results.json', 'w', encoding='utf-8') as f:
+#     json.dump(sensitive_info, f, indent=2, ensure_ascii=False)
+

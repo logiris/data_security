@@ -6,3 +6,6 @@ __pycache__/
 *.pyw
 *.pyz
 data
+test_data
+test_site
+test
